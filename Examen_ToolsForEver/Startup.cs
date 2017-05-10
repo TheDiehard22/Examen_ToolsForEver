@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Examen_ToolsForEver.Data;
 using Examen_ToolsForEver.Models;
 using Examen_ToolsForEver.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace Examen_ToolsForEver
 {
@@ -43,7 +44,10 @@ namespace Examen_ToolsForEver
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(
+                options =>
+                options.Cookies.ApplicationCookie.LoginPath = "/Home/Login"
+            )
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -55,7 +59,7 @@ namespace Examen_ToolsForEver
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, UserManager<ApplicationUser> _userManager, ApplicationDbContext _dbcontext, RoleManager<IdentityRole> _roleManager)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -83,6 +87,10 @@ namespace Examen_ToolsForEver
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            DbInitializer initialize = new DbInitializer(_dbcontext, _roleManager, _userManager);
+            initialize.RolesAreSeeded();
+            initialize.AdminIsSeeded();
         }
     }
 }

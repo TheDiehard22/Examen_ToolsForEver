@@ -8,9 +8,10 @@ using Examen_ToolsForEver.Data;
 namespace Examen_ToolsForEver.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170510093956_teststst")]
+    partial class teststst
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -129,7 +130,11 @@ namespace Examen_ToolsForEver.Data.Migrations
 
                     b.HasKey("ProductID", "LocatieID");
 
-                    b.HasIndex("LocatieID");
+                    b.HasIndex("LocatieID")
+                        .IsUnique();
+
+                    b.HasIndex("ProductID")
+                        .IsUnique();
 
                     b.ToTable("ProductLocatie");
                 });
@@ -252,13 +257,13 @@ namespace Examen_ToolsForEver.Data.Migrations
             modelBuilder.Entity("Examen_ToolsForEver.Models.ProductLocatie", b =>
                 {
                     b.HasOne("Examen_ToolsForEver.Models.Locatie", "Locatie")
-                        .WithMany("ProductLocaties")
-                        .HasForeignKey("LocatieID")
+                        .WithOne("ProductLocatie")
+                        .HasForeignKey("Examen_ToolsForEver.Models.ProductLocatie", "LocatieID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Examen_ToolsForEver.Models.Product", "Product")
-                        .WithMany("ProductLocaties")
-                        .HasForeignKey("ProductID")
+                        .WithOne("ProductLocatie")
+                        .HasForeignKey("Examen_ToolsForEver.Models.ProductLocatie", "ProductID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

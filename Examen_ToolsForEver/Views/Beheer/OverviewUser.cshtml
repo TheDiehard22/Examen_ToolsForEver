@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Examen_ToolsForEver.Models.ApplicationUser>
+
+@{
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <a asp-action="Index" asp-controller="Beheer">Product</a>
+        <a asp-action="OverviewUser" asp-controller="Beheer">Gebruiker</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <td colspan="2">@Html.DisplayNameFor(model => model.UserName)</td>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model => item.UserName)</td>
+                    <td align="right"><a asp-action="Edituser" asp-route-id="@item.Id">Bewerk gebruiker</a></td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+

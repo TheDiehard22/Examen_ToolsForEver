@@ -1,0 +1,32 @@
+﻿@model Examen_ToolsForEver.Models.AccountViewModels.LoginViewModel
+
+@{ 
+    Layout = "_LayoutLogin";
+    //return URL ?
+    ViewData[""] = "";
+}
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="login-container">
+            <h1 class="h1 text-center">ToolsForEver</h1>
+            <span class="text-center" style="display: block;">Login</span>
+            <br />
+            <form asp-action="Login" method="post" asp-controller="Home" class="form-horizontal">
+                <div class="form-group">
+                    <input asp-for="UserName" class="form-control" placeholder="Gebruikersnaam" />
+                </div>
+                <div class="form-group">
+                    <input asp-for="Password" class="form-control" placeholder="Wachtwoord" />
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input asp-for="RememberMe" />
+                        onthoud mij
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-default">Login</button>
+            </form>
+        </div>
+    </div>
+</div>

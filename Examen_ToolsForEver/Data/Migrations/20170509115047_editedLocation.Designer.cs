@@ -8,9 +8,10 @@ using Examen_ToolsForEver.Data;
 namespace Examen_ToolsForEver.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170509115047_editedLocation")]
+    partial class editedLocation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -74,7 +75,11 @@ namespace Examen_ToolsForEver.Data.Migrations
                     b.Property<string>("FabrikantNaam")
                         .IsRequired();
 
+                    b.Property<int?>("ProductID");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("ProductID");
 
                     b.ToTable("Fabrikanten");
                 });
@@ -87,7 +92,11 @@ namespace Examen_ToolsForEver.Data.Migrations
                     b.Property<string>("LocatieNaam")
                         .IsRequired();
 
+                    b.Property<int>("ProductLocatieID");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("ProductLocatieID");
 
                     b.ToTable("Locaties");
                 });
@@ -96,8 +105,6 @@ namespace Examen_ToolsForEver.Data.Migrations
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<int>("FabrikantID");
 
                     b.Property<decimal>("InkoopWaarde");
 
@@ -112,26 +119,25 @@ namespace Examen_ToolsForEver.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("FabrikantID");
-
                     b.ToTable("Producten");
                 });
 
             modelBuilder.Entity("Examen_ToolsForEver.Models.ProductLocatie", b =>
                 {
-                    b.Property<int>("ProductID");
-
-                    b.Property<int>("LocatieID");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("Aantal");
 
-                    b.Property<int>("MinVoorraad");
+                    b.Property<int>("LocatieID");
 
-                    b.HasKey("ProductID", "LocatieID");
+                    b.Property<int>("ProductID");
 
-                    b.HasIndex("LocatieID");
+                    b.HasKey("ID");
 
-                    b.ToTable("ProductLocatie");
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("ProductLocaties");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
@@ -241,22 +247,24 @@ namespace Examen_ToolsForEver.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Examen_ToolsForEver.Models.Product", b =>
+            modelBuilder.Entity("Examen_ToolsForEver.Models.Fabrikant", b =>
                 {
-                    b.HasOne("Examen_ToolsForEver.Models.Fabrikant", "Fabrikant")
-                        .WithMany()
-                        .HasForeignKey("FabrikantID")
+                    b.HasOne("Examen_ToolsForEver.Models.Product")
+                        .WithMany("Fabrikanten")
+                        .HasForeignKey("ProductID");
+                });
+
+            modelBuilder.Entity("Examen_ToolsForEver.Models.Locatie", b =>
+                {
+                    b.HasOne("Examen_ToolsForEver.Models.ProductLocatie")
+                        .WithMany("Locaties")
+                        .HasForeignKey("ProductLocatieID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Examen_ToolsForEver.Models.ProductLocatie", b =>
                 {
-                    b.HasOne("Examen_ToolsForEver.Models.Locatie", "Locatie")
-                        .WithMany("ProductLocaties")
-                        .HasForeignKey("LocatieID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Examen_ToolsForEver.Models.Product", "Product")
+                    b.HasOne("Examen_ToolsForEver.Models.Product")
                         .WithMany("ProductLocaties")
                         .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Cascade);

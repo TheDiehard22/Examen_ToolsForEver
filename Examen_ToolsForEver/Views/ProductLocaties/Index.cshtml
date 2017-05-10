@@ -1,0 +1,54 @@
+@model IEnumerable<Examen_ToolsForEver.Models.ProductLocatie>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-default">Voeg voorraad toe</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Aantal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MinVoorraad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Locatie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="@item.VoorraadCheck()">
+                    @Html.DisplayFor(modelItem => item.Aantal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MinVoorraad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Locatie.LocatieNaam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Naam)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.ProductID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.ProductID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

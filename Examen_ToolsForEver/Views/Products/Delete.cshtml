@@ -1,0 +1,59 @@
+@model Examen_ToolsForEver.Models.Product
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <input type="hidden" asp-for="ID" />
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductLocatieID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductLocatieID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Naam)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Naam)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.InkoopWaarde)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.InkoopWaarde)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VerkoopWaarde)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.VerkoopWaarde)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Fabrikant)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fabrikant.FabrikantNaam)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
+</div>

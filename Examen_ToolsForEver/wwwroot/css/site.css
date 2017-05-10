@@ -48,3 +48,16 @@ textarea {
         display: none;
     }
 }
+
+.login-container {
+    background-color: #f5f5f5;
+    padding: 40px;
+}
+
+.header {
+    line-height: 100px;
+}
+
+.danger {
+    color: red;
+}

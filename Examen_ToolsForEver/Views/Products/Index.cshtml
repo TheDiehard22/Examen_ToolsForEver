@@ -1,0 +1,105 @@
+@model Examen_ToolsForEver.Models.ViewModels.ProductIndexData
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<header class="header">
+    <a asp-controller="ProductLocaties" asp-action="Index" class="btn btn-default">Producten (voorraad)</a>
+    <a asp-controller="ApplicationUsers" asp-action="Index" class="btn btn-default">Gebruikers</a>
+</header>
+
+<h2>Producten</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-default">Create New</a>
+</p>
+
+<div>
+    <form asp-action="Index" method="post" class="form-inline">
+        <span style="display:block;">Zoek op naam of ID</span>
+        <input name="searchValue" value="@ViewData["searchValue"]" placeholder="zoeken..." class="form-control" />
+        <input type="submit" value="zoeken" class="btn btn-default" />
+    </form>
+</div>
+
+
+@foreach (var test in Model.Locaties)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Product
+                </th>
+                <th>
+                    Fabriek
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Voorraad
+                </th>
+                <th>
+                    Minimale voorraad
+                </th>
+                <th>
+                    Locatie
+                </th>
+                <th>
+                    Inkoopprijs
+                </th>
+                <th>
+                    Verkoopprijs
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ProductLocaties)
+            {
+                //testID locatieID
+                if (test.ID.Equals(item.LocatieID))
+                {
+                    var totalewaarde = item.Aantal * item.Product.VerkoopWaarde;
+                    <div style="text-align:right; font-size: 24px">
+                        waarde locatie: <b>@item.Locatie.LocatieNaam</b> @totalewaarde
+                    </div>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.Naam)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.Fabrikant.FabrikantNaam)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.Type)
+                        </td>
+                        <td class="@item.VoorraadCheck()">
+                            @Html.DisplayFor(modelItem => item.Aantal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MinVoorraad)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Locatie.LocatieNaam)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.InkoopWaarde)
+                        </td>
+                        <th>
+                            @Html.DisplayFor(modelItem => item.Product.VerkoopWaarde)
+                        </th>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ProductID">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.ProductID">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ProductID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+
+

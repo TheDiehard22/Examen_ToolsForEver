@@ -1,0 +1,44 @@
+﻿@model Examen_ToolsForEver.Models.ViewModels.IndexViewModel
+
+@{ 
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <a asp-action="Index" asp-controller="Products">Producten</a>
+        <a asp-action="OverviewUser" asp-controller="Beheer">Gebruiker</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <h1 class="h1">Houten hamer - Artikelnummer: 12213</h1>
+    </div>
+    <div class="col-md-4">
+        <a asp-controller="Beheer" asp-action="CreateProduct" class="btn btn-default">Maak nieuw product</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Naam)</td>
+                <td>@Html.DisplayNameFor(model => model.Type)</td>
+                <td>@Html.DisplayNameFor(model => model.Fabriek)</td>
+                <td>@Html.DisplayNameFor(model => model.InkoopWaarde)</td>
+                <td>@Html.DisplayNameFor(model => model.VerkoopWaarde)</td>
+            </tr>
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model => item.Naam)</td>
+                    <td>@Html.DisplayFor(model => item.Type)</td>
+                    <td>@Html.DisplayFor(model => item.InkoopWaarde)</td>
+                    <td>@Html.DisplayFor(model => item.VerkoopWaarde)</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
