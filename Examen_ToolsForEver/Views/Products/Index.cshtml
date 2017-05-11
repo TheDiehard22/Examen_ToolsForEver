@@ -63,7 +63,7 @@
                 {
                     var totalewaarde = item.Aantal * item.Product.VerkoopWaarde;
                     <div style="text-align:right; font-size: 24px">
-                        waarde locatie: <b>@item.Locatie.LocatieNaam</b> @totalewaarde
+                        @Model.LocationTotalValue waarde locatie: <b>@item.Locatie.LocatieNaam</b> @totalewaarde
                     </div>
                     <tr>
                         <td>

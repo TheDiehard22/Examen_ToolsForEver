@@ -88,9 +88,9 @@ namespace Examen_ToolsForEver
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            DbInitializer initialize = new DbInitializer(_dbcontext, _roleManager, _userManager);
-            initialize.RolesAreSeeded();
-            initialize.AdminIsSeeded();
+            //DbInitializer initialize = new DbInitializer(_dbcontext, _roleManager, _userManager);
+            //initialize.RolesAreSeeded();
+            //initialize.AdminIsSeeded();
         }
     }
 }

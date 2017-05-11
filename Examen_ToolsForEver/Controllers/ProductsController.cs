@@ -42,6 +42,21 @@ namespace Examen_ToolsForEver.Controllers
                     .ThenInclude(f => f.Fabrikant)
                 .Include(l => l.Locatie);
 
+            var waardeLocatie = from wl in _dbcontext.ProductLocatie
+                                           join p in _dbcontext.Producten on wl.ProductID equals p.ID
+                                           select wl;
+
+            viewModel.Products = from p in _dbcontext.Producten
+                                 select p;
+
+            viewModel.prijsCalculatie = (from p in _dbcontext.Producten
+                                         from pl in _dbcontext.ProductLocatie
+                                             //where p.productlocatieid == pl.productid
+                                         select new PrijsCalculatie()
+                                         {
+                                             PrijsLocatie = p.VerkoopWaarde * pl.Aantal
+                                         }).ToList();
+
             if (!String.IsNullOrEmpty(searchValue))
             {
                 ViewData["searchValue"] = searchValue;

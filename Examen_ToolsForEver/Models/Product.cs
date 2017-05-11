@@ -34,6 +34,5 @@ namespace Examen_ToolsForEver.Models
         public Fabrikant Fabrikant { get; set; }
         public List<ProductLocatie> ProductLocaties { get; set; }
 
-        public string LocatieNaam { get; }
     }
 }

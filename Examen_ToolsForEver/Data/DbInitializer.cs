@@ -43,7 +43,7 @@ namespace Examen_ToolsForEver.Data
             {
                 UserName = "Admin",
                 Email = "admin@toolsforever.nl",
-                SecurityStamp = Guid.NewGuid().ToString()
+                ConcurrencyStamp = Guid.NewGuid().ToString()
             };
 
             var password = new PasswordHasher<ApplicationUser>();

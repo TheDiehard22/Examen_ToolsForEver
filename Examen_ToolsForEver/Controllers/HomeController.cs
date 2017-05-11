@@ -41,7 +41,7 @@ namespace Examen_ToolsForEver.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _SignInManager.PasswordSignInAsync(loginModel.UserName, loginModel.Password, loginModel.RememberMe, lockoutOnFailure: false);
+                var result = await _SignInManager.PasswordSignInAsync(loginModel.UserName, loginModel.Password, loginModel.RememberMe, false);
 
                 if (result.Succeeded)
                 {

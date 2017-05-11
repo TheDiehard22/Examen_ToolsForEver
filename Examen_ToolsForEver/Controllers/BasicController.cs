@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Examen_ToolsForEver.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class BasicController : Controller
     {
         protected readonly UserManager<ApplicationUser> _userManager;

@@ -13,5 +13,10 @@ namespace Examen_ToolsForEver.Models.ViewModels
         public IEnumerable<ProductLocatie> ProductLocaties { get; set; }
         public IEnumerable<Locatie> Locaties { get; set; }
         public IEnumerable<Fabrikant> Fabrikanten { get; set; }
+
+        public List<PrijsCalculatie> prijsCalculatie { get; set; }
+        //Deze list vullen met een viewmodel waar een join op komt
+
+        public decimal LocationTotalValue { get; set; }
     }
 }

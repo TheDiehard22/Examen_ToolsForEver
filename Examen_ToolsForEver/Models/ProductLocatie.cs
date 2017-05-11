@@ -17,6 +17,7 @@ namespace Examen_ToolsForEver.Models
         public int ProductID { get; set; }
         public Locatie Locatie { get; set; }
         public Product Product { get; set; }
+        
 
         public string VoorraadCheck()
         {
@@ -27,6 +28,19 @@ namespace Examen_ToolsForEver.Models
             return "";
         }
 
-        public int LocatieWaarde { get; }
+        //public decimal LocatieWaarde()
+        //{
+
+        //}
+
+        //public decimal LocationTotalValue
+        //{
+        //    get
+        //    {
+        //        return Products.Sum(p => p.VerkoopWaarde);
+        //    }
+        //}
+
+        //public int LocatieWaarde { get; }
     }
 }
